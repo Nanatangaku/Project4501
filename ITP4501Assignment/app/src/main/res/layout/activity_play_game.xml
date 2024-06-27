@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".playGame"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTimer"
+        android:text="tvTimer"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:textSize="60sp"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvQues_num"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textSize="40sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvQues"
+        android:text="tvQues"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textSize="40sp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etUser_ans"
+        android:hint="Answer here"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/btnConfirm_ans"
+        android:text="btnConfirm_ans"
+        android:onClick="confirmAns"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvAns_result"
+        android:text="tvAns_result"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:textSize="40sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvReal_ans"
+        android:text="tvReal_ans"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:textSize="20sp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnContinue"
+        android:text="Continue"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:onClick="GameOver"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnNext_ques"
+        android:text="btnNext_ques"
+        android:layout_gravity="center"
+        android:onClick="nextQuestion"
+        />
+
+
+
+
+
+</LinearLayout>

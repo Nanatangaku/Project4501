@@ -1,0 +1,80 @@
+package com.example.itp4501assignment;
+
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+    Button btnPlay;
+    Button btnRanking;
+    Button btnRecord;
+    Button btnClose;
+    SQLiteDatabase db;
+    String sql;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+
+        btnPlay = findViewById(R.id.btnPlay);
+        btnRanking = findViewById(R.id.btnRanking);
+        btnRecord = findViewById(R.id.btnRecord);
+        btnClose = findViewById(R.id.btnClose);
+
+        initial_database();
+    }
+
+    public void playGame(View view){
+        Intent i = new Intent(this,playGame.class);
+        startActivity(i);
+    }
+    public void goToRecord(View view){
+        Intent i = new Intent(this,GameRecord.class);
+        startActivity(i);
+    }
+    public void goToGameRanking(View view){
+        Intent i = new Intent(this,GameRanking.class);
+        startActivity(i);
+    }
+
+    //initial the database
+    public void initial_database(){
+        try{
+            db = SQLiteDatabase.openDatabase("/data/data/com.example.itp4501assignment/Project4501DB", null, SQLiteDatabase.CREATE_IF_NECESSARY);
+            sql = "DROP TABLE IF EXISTS GamesLog;";
+            db.execSQL(sql);
+
+            sql = "CREATE TABLE GamesLog ( gameID int , playDate date, playTime time, duration int , correctCount int );";
+            db.execSQL(sql);
+
+
+            db.execSQL("INSERT INTO GamesLog (gameID, playDate,playTime,duration,correctCount) VALUES ( 1,date('now'),time('now')," + 15 + "," + 9 + ");");
+            db.execSQL("INSERT INTO GamesLog (gameID, playDate,playTime,duration,correctCount) VALUES ( 2,date('now'),time('now')," + 25 + "," + 8 + ");");
+
+
+            db.close();
+
+
+
+        }catch (SQLiteException e) {
+            Log.d("SQLiteException", e.getMessage());
+        }
+    }
+
+    public void closeGame(View view){
+        finish();
+    }
+}
