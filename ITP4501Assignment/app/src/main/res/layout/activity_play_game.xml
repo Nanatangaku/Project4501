@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvTimer"
-        android:text="tvTimer"
         android:gravity="center"
         android:layout_marginTop="60dp"
         android:textSize="60sp"
@@ -88,8 +87,12 @@
         android:onClick="nextQuestion"
         />
 
-
-
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/laughtcat"
+        android:visibility="invisible"/>
 
 
 </LinearLayout>

@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.health.connect.datatypes.Record;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,8 @@ public class playGame extends AppCompatActivity{
     TextView tvAns_result;
     TextView tvReal_ans;
     Button btnNext_ques;
+    ImageView imageView;
+    MediaPlayer mediaPlayer;
     String [][] questions = new String[10][2];
     int ques_num = 0;
     int right_ans = 0;
@@ -57,7 +61,9 @@ public class playGame extends AppCompatActivity{
         tvReal_ans = findViewById(R.id.tvReal_ans);
         btnNext_ques = findViewById(R.id.btnNext_ques);
         btnContinue = findViewById(R.id.btnContinue);
-
+        imageView = findViewById(R.id.imageView);
+        imageView.setVisibility(View.INVISIBLE);
+        mediaPlayer = MediaPlayer.create(this, R.raw.crycatsound);
         Timer();
         randomQuestion();
         setQuestion();
@@ -157,6 +163,8 @@ public class playGame extends AppCompatActivity{
             tvReal_ans.setVisibility(View.VISIBLE);
             tvReal_ans.setText("The correct answer is " + questions[ques_num][1]);
             wrong_ans++;
+            mediaPlayer.start();
+
         }
         btnConfirm_ans.setVisibility(View.INVISIBLE);
     }
@@ -170,7 +178,13 @@ public class playGame extends AppCompatActivity{
             tvTimer.setVisibility(View.INVISIBLE);
             tvQues_num.setText("Game Over");
             tvQues.setText("Right Answer: " + right_ans + "\n" + "Wrong Answer: " + wrong_ans + "\n" + "Final time is " + timetext + "sec");
+            if(right_ans >5){
+                imageView.setImageResource(R.drawable.likecat);
 
+            }else{
+                imageView.setImageResource(R.drawable.laughtcat);
+            }
+            imageView.setVisibility(View.VISIBLE);
             etUser_ans.setVisibility(View.INVISIBLE);
             tvReal_ans.setVisibility(View.INVISIBLE);
             tvAns_result.setVisibility(View.INVISIBLE);
