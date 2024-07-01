@@ -3,10 +3,13 @@ package com.example.itp4501assignment;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnRecord;
     Button btnClose;
     SQLiteDatabase db;
+    TextView tvTitle;
     String sql;
 
     @Override
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btnRanking = findViewById(R.id.btnRanking);
         btnRecord = findViewById(R.id.btnRecord);
         btnClose = findViewById(R.id.btnClose);
+        tvTitle = findViewById(R.id.tvTitle);
 
         initial_database();
     }

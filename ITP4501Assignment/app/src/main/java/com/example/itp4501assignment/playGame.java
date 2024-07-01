@@ -64,6 +64,7 @@ public class playGame extends AppCompatActivity{
         imageView = findViewById(R.id.imageView);
         imageView.setVisibility(View.INVISIBLE);
         mediaPlayer = MediaPlayer.create(this, R.raw.crycatsound);
+
         Timer();
         randomQuestion();
         setQuestion();
@@ -183,6 +184,8 @@ public class playGame extends AppCompatActivity{
 
             }else{
                 imageView.setImageResource(R.drawable.laughtcat);
+                mediaPlayer = MediaPlayer.create(this, R.raw.catlaughtyou);
+                mediaPlayer.start();
             }
             imageView.setVisibility(View.VISIBLE);
             etUser_ans.setVisibility(View.INVISIBLE);

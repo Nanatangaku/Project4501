@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mathematic Game!"
@@ -19,7 +20,8 @@
         android:layout_marginTop="150dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="75sp"/>
+        android:textSize="75sp"
+        android:id="@+id/tvTitle"/>
 
     <Button
         android:id="@+id/btnPlay"
