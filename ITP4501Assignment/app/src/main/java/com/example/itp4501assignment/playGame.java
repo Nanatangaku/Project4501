@@ -5,7 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.health.connect.datatypes.Record;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +38,7 @@ public class playGame extends AppCompatActivity{
     Button btnNext_ques;
     ImageView imageView;
     MediaPlayer mediaPlayer;
+    ImageView gifView;
     String [][] questions = new String[10][2];
     int ques_num = 0;
     int right_ans = 0;
@@ -62,8 +65,10 @@ public class playGame extends AppCompatActivity{
         btnNext_ques = findViewById(R.id.btnNext_ques);
         btnContinue = findViewById(R.id.btnContinue);
         imageView = findViewById(R.id.imageView);
-        imageView.setVisibility(View.INVISIBLE);
-        mediaPlayer = MediaPlayer.create(this, R.raw.crycatsound);
+        gifView = findViewById(R.id.gifCat);
+
+
+
 
         Timer();
         randomQuestion();
@@ -151,19 +156,23 @@ public class playGame extends AppCompatActivity{
 
     }
     public void confirmAns(View view){
-        if(etUser_ans.getText().toString().equals((questions[ques_num][1]).toString())){
+        if(etUser_ans.getText().toString().equals((questions[ques_num][1]).toString())) {
 
             tvAns_result.setText("Correct");
             tvAns_result.setVisibility(View.VISIBLE);
             right_ans++;
-        }else{
 
+            mediaPlayer = MediaPlayer.create(this, R.raw.happycat);
+            mediaPlayer.start();
+            //save t
+        }else{
             tvAns_result.setText("Wrong");
             tvAns_result.setVisibility(View.VISIBLE);
 
             tvReal_ans.setVisibility(View.VISIBLE);
             tvReal_ans.setText("The correct answer is " + questions[ques_num][1]);
             wrong_ans++;
+            mediaPlayer = MediaPlayer.create(this, R.raw.crycatsound);
             mediaPlayer.start();
 
         }
