@@ -3,6 +3,7 @@ package com.example.itp4501assignment;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.os.Bundle;
@@ -33,11 +34,19 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        //create a array holding the color
+        float [] positionArray = new float[]{0f,0.3f,0.6f,0.9f};
         btnPlay = findViewById(R.id.btnPlay);
         btnRanking = findViewById(R.id.btnRanking);
         btnRecord = findViewById(R.id.btnRecord);
         btnClose = findViewById(R.id.btnClose);
         tvTitle = findViewById(R.id.tvTitle);
+
+        int[] rainbowColors = {0xFFFF0000, 0xFFFF7F00, 0xFFFFFF00, 0xFF00FF00, 0xFF00FFFF, 0xFF0000FF, 0xFF8B00FF};
+        float[] positions = {0f, 0.05f, 0.1f, 0.15f, 0.2f, 0.25f, 0.3f};
+        Shader shader = new LinearGradient(0, 0, 0, tvTitle.getTextSize() * rainbowColors.length,
+                rainbowColors, positions, Shader.TileMode.MIRROR);
+        tvTitle.getPaint().setShader(shader);
 
         initial_database();
     }
