@@ -25,12 +25,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/lvRanking" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back Home"
         android:onClick="goToHome"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
 
 

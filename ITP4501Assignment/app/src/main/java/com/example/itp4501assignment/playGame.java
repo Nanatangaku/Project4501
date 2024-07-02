@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -69,6 +70,8 @@ public class playGame extends AppCompatActivity{
 
 
 
+        //reset timer when create activity
+        startTime = System.currentTimeMillis();
 
         Timer();
         randomQuestion();
@@ -155,7 +158,17 @@ public class playGame extends AppCompatActivity{
         etUser_ans.setText("");
 
     }
+    //hide hideKeyboard
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(playGame.INPUT_METHOD_SERVICE);
+        View view = getCurrentFocus();
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
     public void confirmAns(View view){
+        hideKeyboard();
         if(etUser_ans.getText().toString().equals((questions[ques_num][1]).toString())) {
 
             tvAns_result.setText("Correct");

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,9 @@ public class GameRecord extends AppCompatActivity {
     TextView tvRecord;
     Button btngoToHome;
     SQLiteDatabase db;
+    RadioButton rbplayTime, rbScore, rbAsc, rbDesc;
+    Button btnShow;
+    String[] columns= {"gameID", "playDate", "playTime", "duration", "correctCount"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,11 @@ public class GameRecord extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_game_record);
         tvRecord = findViewById(R.id.tvRecord);
+        rbplayTime=findViewById(R.id.rb_Duration);
+        rbScore=findViewById(R.id.rb_Score);
+        rbAsc=findViewById(R.id.rb_asc);
+        rbDesc=findViewById(R.id.rb_desc);
+        btnShow=findViewById(R.id.btnShow);
 
         try {
             /* make SQLite Database connection with read only */
@@ -56,5 +65,39 @@ public class GameRecord extends AppCompatActivity {
     }
     public void goToHome(View view){
         finish();
+    }
+
+    public void Show(View view){
+        /* check the value of radio buttons */
+        String sortBy = (rbplayTime.isChecked()) ? "Duration " : "correctCount";
+        String order = (rbAsc.isChecked()) ? " ASC " : " DESC ";
+
+
+        try {
+            /* make SQLite Database connection with read only */
+            db = SQLiteDatabase.openDatabase("/data/data/com.example.itp4501assignment/Project4501DB", null, SQLiteDatabase.OPEN_READONLY);
+            cursor = db.query("GamesLog", columns, null, null, null, null, sortBy + order);
+            String datastr2 = "";;
+            int rank =1;
+
+            /* set cursor to query the information */
+            while (cursor.moveToNext()) {
+                String gameID = cursor.getString(cursor.getColumnIndex("gameID"));
+                String playDate = cursor.getString(cursor.getColumnIndex("playDate"));
+
+                String playTime = cursor.getString(cursor.getColumnIndex("playTime"));
+
+                String duration = cursor.getString(cursor.getColumnIndex("duration"));
+
+                String correctCount = cursor.getString(cursor.getColumnIndex("correctCount"));
+                datastr2 += ("Rank" + rank + ":" + "ID:" + gameID  + "playDate: " + playDate + " Time: " + playTime + " Duration: " + duration + " CorrectCount: " + correctCount + "\n");
+
+            }
+            tvRecord.setText(datastr2);
+
+            db.close();
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }

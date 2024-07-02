@@ -37,18 +37,20 @@
         />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/etUser_ans"
-        android:hint="Answer here"/>
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:hint="Answer here" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/btnConfirm_ans"
-        android:text="btnConfirm_ans"
+        android:text="Confirm Answer"
         android:onClick="confirmAns"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+
         />
 
     <TextView
@@ -64,12 +66,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvReal_ans"
-        android:text="tvReal_ans"
+        android:text="Real Answer"
         android:layout_gravity="center"
         android:visibility="invisible"
         android:textSize="20sp"
         />
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnContinue"
@@ -77,22 +79,28 @@
         android:visibility="invisible"
         android:layout_gravity="center"
         android:onClick="GameOver"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+
         />
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnNext_ques"
-        android:text="btnNext_ques"
+        android:text="Next Question"
         android:layout_gravity="center"
         android:onClick="nextQuestion"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+
         />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/laughtcat"
-        android:visibility="invisible"/>
+        android:rotationY="-4"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/laughtcat" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

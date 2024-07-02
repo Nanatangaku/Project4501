@@ -23,42 +23,44 @@
         android:textSize="75sp"
         android:id="@+id/tvTitle"/>
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Play"
         android:layout_gravity="center"
         android:onClick="playGame"
-        android:textSize="25sp"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         />
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRanking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to Ranking"
-        android:layout_gravity="center"
+        android:text="Ranking"
         android:onClick="goToGameRanking"
-        android:textSize="25sp"
-        />
-    <Button
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_gravity="center"/>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRecord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToRecord"
         android:layout_gravity="center"
         android:text="Your Record"
-        android:textSize="25sp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Close"
         android:layout_gravity="center"
         android:onClick="closeGame"
-        android:textSize="25sp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         />
 
 

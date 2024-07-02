@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -67,19 +69,26 @@ public class MainActivity extends AppCompatActivity {
     //initial the database
     public void initial_database(){
         try{
-            db = SQLiteDatabase.openDatabase("/data/data/com.example.itp4501assignment/Project4501DB", null, SQLiteDatabase.CREATE_IF_NECESSARY);
-            sql = "DROP TABLE IF EXISTS GamesLog;";
-            db.execSQL(sql);
-
-            sql = "CREATE TABLE GamesLog ( gameID int , playDate date, playTime time, duration int , correctCount int );";
-            db.execSQL(sql);
 
 
-            db.execSQL("INSERT INTO GamesLog (gameID, playDate,playTime,duration,correctCount) VALUES ( 1,date('now'),time('now')," + 15 + "," + 9 + ");");
-            db.execSQL("INSERT INTO GamesLog (gameID, playDate,playTime,duration,correctCount) VALUES ( 2,date('now'),time('now')," + 25 + "," + 8 + ");");
+           if(checkDataBase()){
+                db = SQLiteDatabase.openDatabase("/data/data/com.example.itp4501assignment/Project4501DB", null, SQLiteDatabase.CREATE_IF_NECESSARY);
+                sql = "DROP TABLE IF EXISTS GamesLog;";
+                db.execSQL(sql);
+
+                sql = "CREATE TABLE GamesLog ( gameID int , playDate date, playTime time, duration int , correctCount int );";
+                db.execSQL(sql);
 
 
-            db.close();
+                db.execSQL("INSERT INTO GamesLog (gameID, playDate,playTime,duration,correctCount) VALUES ( 1,date('now'),time('now')," + 15 + "," + 9 + ");");
+                db.execSQL("INSERT INTO GamesLog (gameID, playDate,playTime,duration,correctCount) VALUES ( 2,date('now'),time('now')," + 25 + "," + 8 + ");");
+
+
+                db.close();
+            }else{
+                db = SQLiteDatabase.openDatabase("/data/data/com.example.itp4501assignment/Project4501DB", null, SQLiteDatabase.CREATE_IF_NECESSARY);
+                db.close();
+           }
 
 
 
@@ -91,4 +100,19 @@ public class MainActivity extends AppCompatActivity {
     public void closeGame(View view){
         finish();
     }
+    /**
+     * Check if the database exist and can be read.
+     *
+     * @return true if it exists and can be read, false if it doesn't
+     */
+    private boolean checkDataBase() {
+        SQLiteDatabase checkDB = null;
+        try {
+            checkDB = SQLiteDatabase.openDatabase("/data/data/com.example.itp4501assignment/Project4501DB", null,
+                    SQLiteDatabase.OPEN_READONLY);
+            checkDB.close();
+        } catch (SQLiteException e) {
+            return true;
+        }return false;
+  }
 }

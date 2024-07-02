@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ITP4501Assignment</string>
+    <string name="rb_Duration">Sort by Duration</string>
+    <string name="rb_Score">Sort by Score</string>
+    <string name="rb_asc">Ascending</string>
+    <string name="rb_desc">Descending</string>
+    <string name ="btnShow">Show</string>
 </resources>
