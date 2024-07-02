@@ -23,6 +23,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
+
 import org.w3c.dom.Text;
 
 import java.util.Random;
@@ -202,7 +204,10 @@ public class playGame extends AppCompatActivity{
             tvQues_num.setText("Game Over");
             tvQues.setText("Right Answer: " + right_ans + "\n" + "Wrong Answer: " + wrong_ans + "\n" + "Final time is " + timetext + "sec");
             if(right_ans >5){
-                imageView.setImageResource(R.drawable.likecat);
+                Glide.with(this)
+                        .asGif()
+                        .load(R.raw.happycatdance)
+                        .into(imageView);
 
             }else{
                 imageView.setImageResource(R.drawable.laughtcat);

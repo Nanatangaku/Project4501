@@ -39,6 +39,10 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(platform("androidx.compose:compose-bom:2024.06.00"))
 
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
