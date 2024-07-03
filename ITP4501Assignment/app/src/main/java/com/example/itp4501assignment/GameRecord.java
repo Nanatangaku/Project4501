@@ -1,5 +1,6 @@
 package com.example.itp4501assignment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class GameRecord extends AppCompatActivity {
     RadioButton rbplayTime, rbScore, rbAsc, rbDesc;
     Button btnShow;
     String[] columns= {"gameID", "playDate", "playTime", "duration", "correctCount"};
+    String sql = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,5 +101,26 @@ public class GameRecord extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void ResetDB(View view){
+        try{
+            db = SQLiteDatabase.openDatabase("/data/data/com.example.itp4501assignment/Project4501DB", null, SQLiteDatabase.OPEN_READWRITE);
+
+            sql = "DROP TABLE IF EXISTS GamesLog;";
+            db.execSQL(sql);
+
+            sql = "CREATE TABLE GamesLog ( gameID int , playDate date, playTime time, duration int , correctCount int );";
+            db.execSQL(sql);
+            db.close();
+            goToRecord();
+        }catch(Exception e){
+            Log.d("resetdb",e.getMessage());
+        }
+
+    }
+    public void goToRecord(){
+        Intent i = new Intent(this,GameRecord.class);
+        startActivity(i);
     }
 }
