@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tvTitle);
 
         int[] rainbowColors = {0xFFFF0000, 0xFFFF7F00, 0xFFFFFF00, 0xFF00FF00, 0xFF00FFFF, 0xFF0000FF, 0xFF8B00FF};
-        float[] positions = {0f, 0.05f, 0.1f, 0.15f, 0.2f, 0.25f, 0.3f};
+        float[] positions = {0f, 0.08f, 0.16f, 0.24f, 0.32f, 0.4f, 0.48f};
         Shader shader = new LinearGradient(0, 0, 0, tvTitle.getTextSize() * rainbowColors.length,
                 rainbowColors, positions, Shader.TileMode.MIRROR);
         tvTitle.getPaint().setShader(shader);
