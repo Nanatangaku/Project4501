@@ -39,7 +39,8 @@ public class playGame extends AppCompatActivity{
     TextView tvAns_result;
     TextView tvReal_ans;
     Button btnNext_ques;
-    ImageView imageView;
+    Button btnGameOver;
+    ImageView gifcat;    ImageView imageView;
     MediaPlayer mediaPlayer;
     ImageView gifView;
     String [][] questions = new String[10][2];
@@ -51,13 +52,15 @@ public class playGame extends AppCompatActivity{
     int timetext = 0;
     int Score = 0;
     Cursor cursor = null;
+    Boolean HardMode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_play_game);
-
-
+        Intent intent = getIntent();
+        HardMode = intent.getExtras().getBoolean("HardMode");
+        Log.d("Mode",HardMode.toString());
         tvTimer = findViewById(R.id.tvTimer);
         tvQues_num = findViewById(R.id.tvQues_num);
         tvQues = findViewById(R.id.tvQues);
@@ -69,6 +72,7 @@ public class playGame extends AppCompatActivity{
         btnContinue = findViewById(R.id.btnContinue);
         imageView = findViewById(R.id.imageView);
         gifView = findViewById(R.id.gifCat);
+        btnGameOver = findViewById(R.id.btnGameOver);
 
 
 
@@ -79,7 +83,7 @@ public class playGame extends AppCompatActivity{
         randomQuestion();
         setQuestion();
     }
- //count the timer
+    //count the timer
     private void Timer() {
         startTime = System.currentTimeMillis();
         Thread t = new Thread() {
@@ -109,45 +113,125 @@ public class playGame extends AppCompatActivity{
 
 
     }
-//generate random question when create the activity
+    //start game
+    public void startGame() {
+        startTime = System.currentTimeMillis();
+
+        Timer();
+        randomQuestion();
+        setQuestion();
+        tvTimer.setVisibility(View.VISIBLE);
+        tvQues_num.setVisibility(View.VISIBLE);
+        tvQues.setVisibility(View.VISIBLE);
+        etUser_ans.setVisibility(View.VISIBLE);
+        btnConfirm_ans.setVisibility(View.VISIBLE);
+        tvAns_result.setVisibility(View.INVISIBLE);
+        tvReal_ans.setVisibility(View.INVISIBLE);
+        btnContinue.setVisibility(View.INVISIBLE);
+        btnNext_ques.setVisibility(View.VISIBLE);
+        imageView.setVisibility(View.INVISIBLE);
+        gifcat.setVisibility(View.INVISIBLE);
+    }
+    //generate random question when create the activity
     private  void randomQuestion() {
-        for (int i = 0; i < 10; i++) {
-            Random random = new Random();
-            int operand1 = random.nextInt(100) + 1;
-            int operand2 = random.nextInt(100) + 1;
-            String[] operators = {"+", "-", "*", "/"};
-            String operator = operators[random.nextInt(operators.length)];
-            Log.d("operand1", "" + operand1);
-            Log.d("operand2", "" + operand2);
-            Log.d("operators", "" + operators);
-            String question = operand1 + operator + operand2;
-            String answer = "";
-            if (operator == "+") {
-                answer = String.valueOf(operand1 + operand2);
-            } else if (operator == "-") {
-                if (operand1 - operand2 < 0) {
-                    question = operand2 + operator + operand1;
-                    answer = String.valueOf(operand2 - operand1);
+        if (HardMode == false) {
+            for (int i = 0; i < 10; i++) {
+                Random random = new Random();
+                int operand1 = random.nextInt(100) + 1;
+                int operand2 = random.nextInt(100) + 1;
+                String[] operators = {"+", "-", "*", "/"};
+                String operator = operators[random.nextInt(operators.length)];
+                Log.d("operand1", "" + operand1);
+                Log.d("operand2", "" + operand2);
+                Log.d("operators", "" + operators);
+                String question = operand1 + operator + operand2;
+                String answer = "";
+                if (operator == "+") {
+                    answer = String.valueOf(operand1 + operand2);
+
+                } else if (operator == "-") {
+                    if (operand1 - operand2 < 0) {
+                        question = operand2 + operator + operand1;
+                        answer = String.valueOf(operand2 - operand1);
+                    } else {
+                        answer = String.valueOf(operand1 - operand2);
+                    }
+                } else if (operator == "*") {
+                    answer = String.valueOf(operand1 * operand2);
                 } else {
-                    answer = String.valueOf(operand1 - operand2);
+                    if (operand1 - operand2 < 0) {
+                        question = operand2 + operator + operand1;
+                        answer = String.valueOf(operand2 / operand1);
+                    } else {
+                        answer = String.valueOf(operand1 / operand2);
+                    }
+
+
                 }
-            } else if (operator == "*") {
-                answer = String.valueOf(operand1 * operand2);
-            } else {
-                if (operand1 - operand2 < 0) {
-                    question = operand2 + operator + operand1;
-                    answer = String.valueOf(operand2 / operand1);
-                } else {
-                    answer = String.valueOf(operand1 / operand2);
-                }
-
-
-
+                questions[i][0] = question;
+                questions[i][1] = answer;
+                Log.d("question", "" + question);
+                Log.d("answer", "" + answer);
             }
-            questions[i][0] = question;
-            questions[i][1] = answer;
-            Log.d("question", "" + question);
-            Log.d("answer", "" + answer);
+        } else {
+            for (int i = 0; i < 10; i++) {
+                Random random = new Random();
+                int operand1 = random.nextInt(100) + 1;
+                int operand2 = random.nextInt(100) + 1;
+                int operand3 = random.nextInt(100) + 1;
+                String[] operators = {"+", "-", "*", "/"};
+                String[] operators2 = {"+", "-", "*", "/"};
+                String operator = operators[random.nextInt(operators.length)];
+                String operator2 = operators[random.nextInt(operators.length)];
+                Log.d("operand1", "" + operand1);
+                Log.d("operand2", "" + operand2);
+                Log.d("operand3", "" + operand2);
+                Log.d("operators", "" + operators);
+                Log.d("operators2", "" + operators);
+                String question = operand1 + operator + operand2 + operator2 + operand3;
+                String answer = "";
+                //write question and answer of 3 operands and 2 operators
+                if (operator == "+" && operator2 == "+") {
+                    answer = String.valueOf(operand1 + operand2 + operand3);
+
+                } else if (operator == "+" && operator2 == "-") {
+                    answer = String.valueOf(operand1 + operand2 - operand3);
+                } else if (operator == "+" && operator2 == "*") {
+                    answer = String.valueOf(operand1 + operand2 * operand3);
+                } else if (operator == "+" && operator2 == "/") {
+                    answer = String.valueOf(operand1 + operand2 / operand3);
+                } else if (operator == "-" && operator2 == "+") {
+                    answer = String.valueOf(operand1 - operand2 + operand3);
+                } else if (operator == "-" && operator2 == "-") {
+                    answer = String.valueOf(operand1 - operand2 - operand3);
+                } else if (operator == "-" && operator2 == "*") {
+                    answer = String.valueOf(operand1 - operand2 * operand3);
+                } else if (operator == "-" && operator2 == "/") {
+                    answer = String.valueOf(operand1 - operand2 / operand3);
+                } else if (operator == "*" && operator2 == "+") {
+                    answer = String.valueOf(operand1 * operand2 + operand3);
+                } else if (operator == "*" && operator2 == "-") {
+                    answer = String.valueOf(operand1 * operand2 - operand3);
+                } else if (operator == "*" && operator2 == "*") {
+                    answer = String.valueOf(operand1 * operand2 * operand3);
+                } else if (operator == "*" && operator2 == "/") {
+                    answer = String.valueOf(operand1 * operand2 / operand3);
+                } else if (operator == "/" && operator2 == "+") {
+                    answer = String.valueOf(operand1 / operand2 + operand3);
+                } else if (operator == "/" && operator2 == "-") {
+                    answer = String.valueOf(operand1 / operand2 - operand3);
+                } else if (operator == "/" && operator2 == "*") {
+                    answer = String.valueOf(operand1 / operand2 * operand3);
+                } else if (operator == "/" && operator2 == "/") {
+                    answer = String.valueOf(operand1 / operand2 / operand3);
+                }
+
+
+                questions[i][0] = question;
+                questions[i][1] = answer;
+                Log.d("question", "" + question);
+                Log.d("answer", "" + answer);
+            }
         }
     }
     //set the question and answer to the textview
@@ -192,6 +276,8 @@ public class playGame extends AppCompatActivity{
 
         }
         btnConfirm_ans.setVisibility(View.INVISIBLE);
+        btnNext_ques.setVisibility(View.VISIBLE);
+
     }
 
     public void nextQuestion(View view){
@@ -203,6 +289,7 @@ public class playGame extends AppCompatActivity{
             tvTimer.setVisibility(View.INVISIBLE);
             tvQues_num.setText("Game Over");
             tvQues.setText("Right Answer: " + right_ans + "\n" + "Wrong Answer: " + wrong_ans + "\n" + "Final time is " + timetext + "sec");
+            btnConfirm_ans.setVisibility(View.INVISIBLE);
             if(right_ans >5){
                 Glide.with(this)
                         .asGif()
@@ -213,22 +300,65 @@ public class playGame extends AppCompatActivity{
                 imageView.setImageResource(R.drawable.laughtcat);
                 mediaPlayer = MediaPlayer.create(this, R.raw.catlaughtyou);
                 mediaPlayer.start();
+
             }
             imageView.setVisibility(View.VISIBLE);
             etUser_ans.setVisibility(View.INVISIBLE);
             tvReal_ans.setVisibility(View.INVISIBLE);
             tvAns_result.setVisibility(View.INVISIBLE);
-            btnNext_ques.setVisibility(View.INVISIBLE);
+
             //stop the timer
             btnContinue.setVisibility(View.VISIBLE);
+            btnGameOver.setVisibility(View.VISIBLE);
+            btnConfirm_ans.setVisibility(View.INVISIBLE);
+
 
         }else {
             tvAns_result.setVisibility(View.INVISIBLE);
             btnConfirm_ans.setVisibility(View.VISIBLE);
+
             ques_num++;
             setQuestion();
+            mediaPlayer.stop();
         }
+        btnNext_ques.setVisibility(View.INVISIBLE);
+
+
     }
+    public void Continue(View view){
+        try {
+
+
+            /* make SQLite Database connection with read only */
+            SQLiteDatabase db = SQLiteDatabase.openDatabase("/data/data/com.example.itp4501assignment/Project4501DB", null, SQLiteDatabase.CREATE_IF_NECESSARY);
+            int gameID = 0;
+            cursor = db.rawQuery("select * from Gameslog order by gameID DESC", null);
+            if (cursor.moveToFirst()) {
+                gameID = cursor.getInt(cursor.getColumnIndex("gameID"));
+            }
+
+
+            gameID++;
+            //set the platDate system date
+            db.execSQL("INSERT INTO GamesLog (gameID, playDate,playTime,duration,correctCount) VALUES (" + gameID + ",date('now'),time('now')," + timetext + "," + Score + ");");
+
+
+
+            db.close();
+        } catch (Exception e) {
+            Log.d("SQLiteException", e.getMessage());
+        }
+        mediaPlayer.stop();
+        this.finish();
+        playGame();
+
+    }
+    public void playGame(){
+        Intent i = new Intent(this,playGame.class);
+        i.putExtra("HardMode",HardMode);
+        startActivity(i);
+    }
+
     public void GameOver(View view){
         try {
 
@@ -252,8 +382,10 @@ public class playGame extends AppCompatActivity{
         } catch (Exception e) {
             Log.d("SQLiteException", e.getMessage());
         }
-        finish();
+        mediaPlayer.stop();
+        this.finish();
     }
+
 
 
 

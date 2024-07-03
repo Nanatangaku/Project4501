@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     SQLiteDatabase db;
     TextView tvTitle;
     String sql;
+    CheckBox cbMode;
+    Boolean HardMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         btnRecord = findViewById(R.id.btnRecord);
         btnClose = findViewById(R.id.btnClose);
         tvTitle = findViewById(R.id.tvTitle);
+        cbMode = findViewById(R.id.cbMode);
 
         int[] rainbowColors = {0xFFFF0000, 0xFFFF7F00, 0xFFFFFF00, 0xFF00FF00, 0xFF00FFFF, 0xFF0000FF, 0xFF8B00FF};
         float[] positions = {0f, 0.08f, 0.16f, 0.24f, 0.32f, 0.4f, 0.48f};
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void playGame(View view){
         Intent i = new Intent(this,playGame.class);
+        i.putExtra("HardMode",HardMode);
         startActivity(i);
     }
     public void goToRecord(View view){
@@ -71,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         try{
 
 
-           if(checkDataBase()){
+            if(checkDataBase()){
                 db = SQLiteDatabase.openDatabase("/data/data/com.example.itp4501assignment/Project4501DB", null, SQLiteDatabase.CREATE_IF_NECESSARY);
                 sql = "DROP TABLE IF EXISTS GamesLog;";
                 db.execSQL(sql);
@@ -88,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 db = SQLiteDatabase.openDatabase("/data/data/com.example.itp4501assignment/Project4501DB", null, SQLiteDatabase.CREATE_IF_NECESSARY);
                 db.close();
-           }
+            }
 
 
 
@@ -114,5 +119,18 @@ public class MainActivity extends AppCompatActivity {
         } catch (SQLiteException e) {
             return true;
         }return false;
-  }
+    }
+    protected void onResume(){
+        super.onResume();
+        //get
+    }
+
+    //onCLick function for the checkbox
+    public void ChangeMode(View view){
+        if(cbMode.isChecked()){
+            HardMode = true;
+        }else{
+            HardMode = false;
+        }
+    }
 }

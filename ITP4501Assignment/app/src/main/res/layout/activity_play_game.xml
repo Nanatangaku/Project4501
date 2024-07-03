@@ -78,9 +78,18 @@
         android:text="Continue"
         android:visibility="invisible"
         android:layout_gravity="center"
+        android:onClick="Continue"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnGameOver"
+        android:text="Game Over"
+        android:visibility="invisible"
+        android:layout_gravity="center"
         android:onClick="GameOver"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-
         />
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
@@ -89,6 +98,7 @@
         android:text="Next Question"
         android:layout_gravity="center"
         android:onClick="nextQuestion"
+        android:visibility="invisible"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
 
         />
@@ -101,11 +111,12 @@
         app:srcCompat="@drawable/laughtcat" />
 
     <ImageView
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gifCat"
         android:visibility="invisible"
-         />
+        />
 
 
 </LinearLayout>

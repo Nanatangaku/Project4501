@@ -24,16 +24,24 @@
         android:id="@+id/tvTitle"/>
 
 
+
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Play"
+        android:gravity="center"
         android:layout_gravity="center"
         android:onClick="playGame"
 
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         />
+
+
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRanking"
         android:layout_width="wrap_content"
@@ -61,6 +69,14 @@
         android:layout_gravity="center"
         android:onClick="closeGame"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Hard Mode"
+        android:id="@+id/cbMode"
+        android:onClick="ChangeMode"
         />
 
 

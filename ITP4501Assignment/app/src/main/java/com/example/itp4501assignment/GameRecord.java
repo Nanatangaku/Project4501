@@ -120,6 +120,7 @@ public class GameRecord extends AppCompatActivity {
 
     }
     public void goToRecord(){
+        this.finish();
         Intent i = new Intent(this,GameRecord.class);
         startActivity(i);
     }
